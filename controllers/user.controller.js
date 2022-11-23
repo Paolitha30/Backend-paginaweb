@@ -122,12 +122,21 @@ function uploadImage(req, res) {
 
     }
 
+    function getUsers(req, res) {
+        User.find((err,users)=>{
+            if(err)return res.status(500).send({message:'Error en el servidor' + err});
+            if(!users)return res.status(404).send({message:"No se encontraron usuarios"});
+            if(users)return res.status(200).send({users:users}); 
+        })
+    }
+
 module.exports ={
     register,
     updateUser,
     login,
     uploadImage,
-    getImageFile
+    getImageFile,
+    getUsers
     
 
 }
